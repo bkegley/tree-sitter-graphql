@@ -1,0 +1,21 @@
+===
+should do something
+===
+
+false
+
+---
+
+(source_file (document (definition (executable_definition (operation_definition))))
+
+===
+should recognize a query keyword
+===
+
+{
+  query m {
+  }
+}
+
+---
+(source_file (document (definition)))

@@ -1,0 +1,21 @@
+{
+  "name": "tree-sitter-graphql",
+  "version": "0.0.1",
+  "description": "A treesitter grammar for GraphQL",
+  "main": "index.js",
+  "author": "Bryan Kegley <hi@bryankegley.me>",
+  "license": "MIT",
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "build": "tree-sitter generate && node-gyp build",
+    "parse": "tree-sitter parse examples/query.graphql",
+    "test": "tree-sitter test"
+  },
+  "dependencies": {
+    "nan": "^2.14.2"
+  },
+  "devDependencies": {
+    "node-gyp": "^7.1.2",
+    "tree-sitter-cli": "^0.17.3"
+  }
+}
