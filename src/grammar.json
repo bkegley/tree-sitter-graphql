@@ -5,26 +5,6 @@
       "type": "SYMBOL",
       "name": "document"
     },
-    "comment": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "#"
-          },
-          {
-            "type": "PATTERN",
-            "value": ".*"
-          }
-        ]
-      }
-    },
-    "comma": {
-      "type": "STRING",
-      "value": ","
-    },
     "document": {
       "type": "REPEAT1",
       "content": {
@@ -47,6 +27,44 @@
         {
           "type": "SYMBOL",
           "name": "operation_definition"
+        }
+      ]
+    },
+    "type_system_definition": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "schema_definition"
+        }
+      ]
+    },
+    "schema_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "description"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "schema"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
         }
       ]
     },
@@ -581,9 +599,29 @@
       "type": "PATTERN",
       "value": "[_A-Za-z][_0-9A-Za-z]*"
     },
-    "boolean_keyword": {
+    "comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "#"
+          },
+          {
+            "type": "PATTERN",
+            "value": ".*"
+          }
+        ]
+      }
+    },
+    "comma": {
       "type": "STRING",
-      "value": "Boolean"
+      "value": ","
+    },
+    "description": {
+      "type": "SYMBOL",
+      "name": "string_value"
     }
   },
   "extras": [

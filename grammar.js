@@ -16,7 +16,7 @@ module.exports = grammar({
       $.schema_definition,
       //$.type_definition,
       //$.directive_definition
-    )
+    ),
     schema_definition: $ => seq(
       optional($.description),
       'schema',
@@ -24,8 +24,7 @@ module.exports = grammar({
       '{',
       //$.root_operation_type_definition,
       '}'
-    )
-    type_definition: $ => 
+    ),
     operation_definition: $ => choice(
       $.selection_set, 
       seq(
@@ -119,5 +118,6 @@ module.exports = grammar({
     //enum_definition: $ => seq('enum', $.name, '{', $.field_definition, '}')
     comment: $ => token(seq('#', /.*/)),
     comma: $ => ',',
+    description: $ => $.string_value,
   }
 })

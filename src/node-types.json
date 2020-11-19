@@ -69,6 +69,21 @@
     }
   },
   {
+    "type": "description",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "directive_locations",
     "named": true,
     "fields": {},
@@ -240,6 +255,21 @@
     "type": "operation_type",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "schema_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "description",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "selection",
@@ -500,6 +530,10 @@
   },
   {
     "type": "query",
+    "named": false
+  },
+  {
+    "type": "schema",
     "named": false
   },
   {

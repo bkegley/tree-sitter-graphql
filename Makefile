@@ -1,15 +1,15 @@
 generate:
-	tree-sitter-cli generate
+	./node_modules/tree-sitter-cli/cli.js generate
 
 test: generate
 	nvim --headless -c "luafile ./lua/tests_to_corpus.lua" -c "qa!"
-	tree-sitter-cli test
+	./node_modules/tree-sitter-cli/cli.js test
 
 build_parser: generate
-	cc -o ./build/parser.so -I./src src/parser.c src/scanner.cc -shared -Os -lstdc++ -fPIC
+	cc -o ./build/parser.so -I./src src/parser.c -shared -Os -lstdc++ -fPIC
 
 wasm: build_parser
-	tree-sitter-cli build-wasm
+	./node_modules/tree-sitter-cli/cli.js build-wasm
 
 web: wasm
-	tree-sitter-cli web-ui
+	./node_modules/tree-sitter-cli/cli.js web-ui
