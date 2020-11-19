@@ -1,14 +1,16 @@
 ===
-should do something
+should recognize a type definition
 ===
 
-false
+type User {
+  username: String
+}
+
+===
 
 ---
+(source_file (document (definition (type_system_definition (type_definition (object_type_definition (name) (fields_definition (field_definition (field (alias (name)))))))))))
 
-(source_file (document (definition (executable_definition (operation_definition))))
-
-===
 should recognize a query keyword
 ===
 

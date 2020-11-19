@@ -1,3 +1,0 @@
-type Entity {
-  id: string
-}
