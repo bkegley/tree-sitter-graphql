@@ -1,16 +1,20 @@
+interface Entity {
+  id: String!
+}
+
 interface Person {
   name: String!
 }
 
-type User implements Person {
+type Contact implements Person {
+  name: String!
+}
+
+type User implements Entity & Person {
   name: String!
   username: String!
   password: String
   createdAt: Date
-}
-
-type Contact implements Person {
-  name: String!
 }
 
 union People = User | Contact

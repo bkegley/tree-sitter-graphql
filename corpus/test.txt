@@ -21,7 +21,7 @@ type Email {
 
 (source_file (document 
   (definition (type_system_definition
-    (type_definition (object_type_definition 
+    (type_definition (object_type_definition
       (name)
       (fields_definition
         (field_definition
@@ -44,7 +44,7 @@ type Email {
           (name)
           (type (named_type (name)))))))))
   (definition (type_system_definition
-    (type_definition (object_type_definition 
+    (type_definition (object_type_definition
       (description (string_value))
       (name)
       (fields_definition
@@ -136,11 +136,16 @@ interface Entity {
   id: String
 }
 
-interface Person emplements Entity {
+interface Person {
   firstName: String
 }
 
-type User implements Person {
+type Contact implements Entity {
+  id: String
+}
+
+type User implements Entity & Person {
+  id: String
   firstName: String
 }
 
@@ -155,14 +160,26 @@ type User implements Person {
   (definition (type_system_definition (type_definition
     (interface_type_definition
       (name)
-      (implements_interfaces (named_type (name)))
       (fields_definition (field_definition
         (name)
         (type (named_type (name)))))))))
-  (definition (type_system_definition (type_definition 
+  (definition (type_system_definition (type_definition
     (object_type_definition
       (name)
       (implements_interfaces (named_type (name)))
       (fields_definition (field_definition
         (name)
-        (type (named_type (name)))))))))))
+        (type (named_type (name)))))))))
+  (definition (type_system_definition (type_definition
+    (object_type_definition
+      (name)
+      (implements_interfaces
+        (implements_interfaces (named_type (name)))
+        (named_type (name)))
+      (fields_definition
+        (field_definition
+          (name)
+          (type (named_type (name))))
+        (field_definition
+          (name)
+          (type (named_type (name)))))))))))
