@@ -1,23 +1,168 @@
 ===
-should recognize a type definition
+Type Definition
 ===
 
 type User {
+  firstName: String
+  username: String!
+  password: String @deprecated
+  createdAt(format: String): String
+  email: Email
+}
+
+"""
+An email address
+"""
+type Email {
+  value: String
+}
+
+---
+
+(source_file (document 
+  (definition (type_system_definition
+    (type_definition (object_type_definition 
+      (name)
+      (fields_definition
+        (field_definition
+          (name)
+          (type (named_type (name))))
+        (field_definition
+          (name)
+          (type (non_null_type (named_type (name)))))
+        (field_definition
+          (name)
+          (type (named_type (name)))
+          (directives (directive (name))))
+        (field_definition
+          (name)
+          (arguments_definition (input_value_definition
+            (name)
+            (type (named_type (name)))))
+          (type (named_type (name))))
+        (field_definition
+          (name)
+          (type (named_type (name)))))))))
+  (definition (type_system_definition
+    (type_definition (object_type_definition 
+      (description (string_value))
+      (name)
+      (fields_definition
+        (field_definition
+          (name)
+          (type (named_type (name)))))))))))
+
+===
+Input Type Definition
+===
+
+input CreateUser {
   username: String
-}
-
-===
-
----
-(source_file (document (definition (type_system_definition (type_definition (object_type_definition (name) (fields_definition (field_definition (field (alias (name)))))))))))
-
-should recognize a query keyword
-===
-
-{
-  query m {
-  }
+  password: String!
+  createdAt: String = "2020-11-19"
 }
 
 ---
-(source_file (document (definition)))
+(source_file (document (definition (type_system_definition (type_definition
+  (input_object_type_definition
+    (name)
+    (input_fields_definition
+      (input_value_definition
+        (name)
+        (type (named_type (name))))
+      (input_value_definition
+        (name)
+        (type (non_null_type (named_type (name)))))
+      (input_value_definition
+        (name)
+        (type (named_type (name)))
+        (default_value (value (string_value)))))))))))
+
+===
+Enum Type Definition
+===
+
+enum Answer {
+  """
+  Answer yes to the question
+  """
+  YES
+  NO
+  MAYBE @deprecated
+}
+
+---
+(source_file (document (definition (type_system_definition (type_definition
+  (enum_type_definition
+    (name)
+    (enum_values_definition
+      (enum_value_definition 
+        (description (string_value))
+        (enum_value (name)))
+      (enum_value_definition (enum_value (name)))
+      (enum_value_definition
+        (enum_value (name))
+        (directives (directive (name)))))))))))
+
+
+
+===
+Scalar Type Definition
+===
+
+scalar MyScalar
+
+"""
+This is a better scalar than MyScalar
+"""
+scalar YourScalar @deprecated
+
+---
+(source_file (document
+  (definition (type_system_definition (type_definition
+    (scalar_type_definition
+      (name)))))
+  (definition (type_system_definition (type_definition
+    (scalar_type_definition
+      (description (string_value))
+      (name)
+      (directives (directive (name)))))))))
+
+===
+Interface Type Definition
+===
+
+interface Entity {
+  id: String
+}
+
+interface Person emplements Entity {
+  firstName: String
+}
+
+type User implements Person {
+  firstName: String
+}
+
+---
+(source_file (document
+  (definition (type_system_definition (type_definition
+    (interface_type_definition
+      (name)
+      (fields_definition (field_definition
+        (name)
+        (type (named_type (name)))))))))
+  (definition (type_system_definition (type_definition
+    (interface_type_definition
+      (name)
+      (implements_interfaces (named_type (name)))
+      (fields_definition (field_definition
+        (name)
+        (type (named_type (name)))))))))
+  (definition (type_system_definition (type_definition 
+    (object_type_definition
+      (name)
+      (implements_interfaces (named_type (name)))
+      (fields_definition (field_definition
+        (name)
+        (type (named_type (name)))))))))))

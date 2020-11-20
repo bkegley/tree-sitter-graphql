@@ -383,7 +383,23 @@
       "required": true,
       "types": [
         {
-          "type": "field",
+          "type": "arguments_definition",
+          "named": true
+        },
+        {
+          "type": "description",
+          "named": true
+        },
+        {
+          "type": "directives",
+          "named": true
+        },
+        {
+          "type": "name",
+          "named": true
+        },
+        {
+          "type": "type",
           "named": true
         }
       ]
@@ -394,7 +410,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -512,7 +528,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -707,7 +723,7 @@
     }
   },
   {
-    "type": "not_null_type",
+    "type": "non_null_type",
     "named": true,
     "fields": {},
     "children": {
@@ -1031,7 +1047,7 @@
           "named": true
         },
         {
-          "type": "not_null_type",
+          "type": "non_null_type",
           "named": true
         }
       ]

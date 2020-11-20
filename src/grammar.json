@@ -573,8 +573,11 @@
                 ]
               },
               {
-                "type": "SYMBOL",
-                "name": "input_fields_definition"
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "input_fields_definition"
+                }
               }
             ]
           },
@@ -618,8 +621,11 @@
           "value": "{"
         },
         {
-          "type": "SYMBOL",
-          "name": "input_value_definition"
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "input_value_definition"
+          }
         },
         {
           "type": "STRING",
@@ -708,8 +714,16 @@
               "value": "implements"
             },
             {
-              "type": "STRING",
-              "value": "&"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "&"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
             },
             {
               "type": "SYMBOL",
@@ -727,8 +741,11 @@
           "value": "{"
         },
         {
-          "type": "SYMBOL",
-          "name": "field_definition"
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "field_definition"
+          }
         },
         {
           "type": "STRING",
@@ -736,7 +753,7 @@
         }
       ]
     },
-    "field_defintion": {
+    "field_definition": {
       "type": "SEQ",
       "members": [
         {
@@ -1460,11 +1477,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "fragment_spread"
+          "name": "inline_fragment"
         },
         {
           "type": "SYMBOL",
-          "name": "inline_fragment"
+          "name": "fragment_spread"
         }
       ]
     },
@@ -1524,13 +1541,6 @@
           ]
         }
       ]
-    },
-    "field_definition": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "SYMBOL",
-        "name": "field"
-      }
     },
     "alias": {
       "type": "SEQ",
@@ -2096,7 +2106,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "not_null_type"
+          "name": "non_null_type"
         }
       ]
     },
@@ -2121,7 +2131,7 @@
         }
       ]
     },
-    "not_null_type": {
+    "non_null_type": {
       "type": "CHOICE",
       "members": [
         {

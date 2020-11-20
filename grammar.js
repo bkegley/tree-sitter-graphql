@@ -116,12 +116,13 @@ module.exports = grammar({
             "input",
             $.name,
             optional($.directives),
-            $.input_fields_definition
+            repeat1($.input_fields_definition)
           ),
           seq("extend", "input", $.name, optional($.directives))
         )
       ),
-    input_fields_definition: ($) => seq("{", $.input_value_definition, "}"),
+    input_fields_definition: ($) =>
+      seq("{", repeat1($.input_value_definition), "}"),
     enum_values_definition: ($) =>
       seq("{", repeat1($.enum_value_definition), "}"),
     enum_value_definition: ($) =>
@@ -129,10 +130,10 @@ module.exports = grammar({
     implements_interfaces: ($) =>
       choice(
         seq($.implements_interfaces, "&", $.named_type),
-        seq("implements", "&", $.named_type)
+        seq("implements", optional("&"), $.named_type)
       ),
-    fields_definition: ($) => seq("{", $.field_definition, "}"),
-    field_defintion: ($) =>
+    fields_definition: ($) => seq("{", repeat1($.field_definition), "}"),
+    field_definition: ($) =>
       seq(
         optional($.description),
         $.name,
@@ -246,7 +247,7 @@ module.exports = grammar({
         optional($.directives)
       ),
     selection_set: ($) => seq("{", repeat1($.selection), "}"),
-    selection: ($) => choice($.field, $.fragment_spread, $.inline_fragment),
+    selection: ($) => choice($.field, $.inline_fragment, $.fragment_spread),
     field: ($) =>
       seq(
         optional($.alias),
@@ -255,7 +256,6 @@ module.exports = grammar({
         optional($.directive),
         optional($.selection_set)
       ),
-    field_definition: ($) => repeat1($.field),
     alias: ($) => seq($.name, ":"),
     arguments: ($) => seq("(", repeat1($.argument), ")"),
     argument: ($) => seq($.name, ":", $.value),
@@ -355,10 +355,10 @@ module.exports = grammar({
         "INPUT_OBJECT",
         "INPUT_FIELD_DEFINITION"
       ),
-    type: ($) => choice($.named_type, $.list_type, $.not_null_type),
+    type: ($) => choice($.named_type, $.list_type, $.non_null_type),
     named_type: ($) => $.name,
     list_type: ($) => seq("[", $.type, "]"),
-    not_null_type: ($) => choice(seq($.named_type, "!"), seq($.list_type, "!")),
+    non_null_type: ($) => choice(seq($.named_type, "!"), seq($.list_type, "!")),
     name: ($) => /[_A-Za-z][_0-9A-Za-z]*/,
     comment: ($) => token(seq("#", /.*/)),
     comma: ($) => ",",

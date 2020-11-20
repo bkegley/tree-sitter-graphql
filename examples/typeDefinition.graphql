@@ -1,3 +1,37 @@
-type User {
+interface Person {
+  name: String!
+}
+
+type User implements Person {
+  name: String!
   username: String!
+  password: String
+  createdAt: Date
+}
+
+type Contact implements Person {
+  name: String!
+}
+
+union People = User | Contact
+
+scalar Date
+
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+input CreateUser {
+  username: String!
+  password: String! = "supersecretpassword"
+}
+
+extend type Query {
+  listUsers: [User]
+  getUser(id: ID!): User
+}
+
+extend type Mutation {
+  createUser(input: CreateUser): User
 }
