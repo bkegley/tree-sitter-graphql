@@ -142,7 +142,8 @@ module.exports = grammar({
         $.type,
         optional($.directives)
       ),
-    arguments_definition: ($) => seq("(", $.input_value_definition, ")"),
+    arguments_definition: ($) =>
+      seq("(", repeat1($.input_value_definition), ")"),
     input_value_definition: ($) =>
       seq(
         optional($.description),
@@ -244,7 +245,8 @@ module.exports = grammar({
         ":",
         $.type,
         optional($.default_value),
-        optional($.directives)
+        optional($.directives),
+        optional($.comma)
       ),
     selection_set: ($) => seq("{", repeat1($.selection), "}"),
     selection: ($) => choice($.field, $.inline_fragment, $.fragment_spread),
@@ -295,7 +297,7 @@ module.exports = grammar({
     list_value: ($) => seq("[", repeat($.value), "]"),
     object_value: ($) => seq("{", repeat($.object_field), "}"),
     object_field: ($) => seq($.name, ":", $.value),
-    fragment_spread: ($) => seq("...", $.fragment_name, $.directives),
+    fragment_spread: ($) => seq("...", $.fragment_name, optional($.directives)),
     fragment_definition: ($) =>
       seq(
         "fragment",

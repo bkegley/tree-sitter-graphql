@@ -53,7 +53,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -1325,6 +1325,10 @@
       "required": true,
       "types": [
         {
+          "type": "comma",
+          "named": true
+        },
+        {
           "type": "default_value",
           "named": true
         },
@@ -1485,6 +1489,10 @@
   {
     "type": "]",
     "named": false
+  },
+  {
+    "type": "comma",
+    "named": true
   },
   {
     "type": "directive",

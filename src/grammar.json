@@ -814,8 +814,11 @@
           "value": "("
         },
         {
-          "type": "SYMBOL",
-          "name": "input_value_definition"
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "input_value_definition"
+          }
         },
         {
           "type": "STRING",
@@ -1445,6 +1448,18 @@
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "comma"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -1817,8 +1832,16 @@
           "name": "fragment_name"
         },
         {
-          "type": "SYMBOL",
-          "name": "directives"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "directives"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
