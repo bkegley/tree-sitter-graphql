@@ -1,4 +1,7 @@
 interface Entity {
+  """
+  The entity unique identifier
+  """
   id: String!
 }
 
