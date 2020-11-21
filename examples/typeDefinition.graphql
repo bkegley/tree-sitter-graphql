@@ -42,3 +42,7 @@ extend type Query {
 extend type Mutation {
   createUser(input: CreateUser): User
 }
+
+directive @auth(scope: String) repeatable on QUERY | MUTATION
+
+directive @dateFormat(format: String = "YY-MM-DD") on FIELD

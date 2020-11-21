@@ -47,6 +47,10 @@ extend type Mutation {
   createUser(input: CreateUser): User
 }
 
+directive @auth(scope: String) repeatable on QUERY | MUTATION
+
+directive @dateFormat(format: String = "YY-MM-DD") on FIELD
+
 ---
 (source_file (document
   (definition (type_system_definition (type_definition (interface_type_definition
@@ -120,7 +124,22 @@ extend type Mutation {
       (arguments_definition (input_value_definition 
         (name)
         (type (named_type (name)))))
-      (type (named_type (name)))))))))))
+      (type (named_type (name)))))))))
+  (definition (type_system_definition (directive_definition
+    (name)
+    (arguments_definition (input_value_definition
+      (name)
+      (type (named_type (name)))))
+    (directive_locations (directive_locations
+      (directive_location (executable_directive_location)))
+      (directive_location (executable_directive_location))))))
+  (definition (type_system_definition (directive_definition
+    (name)
+    (arguments_definition (input_value_definition
+      (name)
+      (type (named_type (name)))
+      (default_value (value (string_value)))))
+    (directive_locations (directive_location (executable_directive_location))))))))
 
 ===
 Executable Definitions

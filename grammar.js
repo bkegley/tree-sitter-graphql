@@ -326,11 +326,17 @@ module.exports = grammar({
           "@",
           $.name,
           optional($.arguments_definition),
+          optional("repeatable"),
           "on",
           $.directive_locations
         )
       ),
     directive_locations: ($) =>
+      choice(
+        seq($.directive_locations, "|", $.directive_location),
+        seq(optional("|"), $.directive_location)
+      ),
+    directive_location: ($) =>
       choice($.executable_directive_location, $.type_system_directive_location),
     executable_directive_location: ($) =>
       choice(

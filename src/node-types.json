@@ -168,7 +168,7 @@
     }
   },
   {
-    "type": "directive_locations",
+    "type": "directive_location",
     "named": true,
     "fields": {},
     "children": {
@@ -181,6 +181,25 @@
         },
         {
           "type": "type_system_directive_location",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "directive_locations",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "directive_location",
+          "named": true
+        },
+        {
+          "type": "directive_locations",
           "named": true
         }
       ]
@@ -1552,6 +1571,10 @@
   },
   {
     "type": "query",
+    "named": false
+  },
+  {
+    "type": "repeatable",
     "named": false
   },
   {
