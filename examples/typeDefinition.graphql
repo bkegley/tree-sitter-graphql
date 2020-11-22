@@ -5,6 +5,8 @@ interface Entity {
   id: String!
 }
 
+directive @skip on FIELD_DEFINITION
+
 interface Person {
   name: String!
 }

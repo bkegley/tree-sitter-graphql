@@ -3,6 +3,7 @@ local ts_utils = require'nvim-treesitter.ts_utils'
 
 local M = {}
 
+
 vim.treesitter.require_language('graphql', '/local/repos/oss/tree-sitter-graphql/build/parser.so')
 
 local read = function(f)
@@ -15,6 +16,7 @@ end
 
 local get_query = function(query_name)
  local query = read(string.format('./queries/graphql/%s.scm', query_name))
+ print(query)
  return query
 end
 
@@ -32,26 +34,25 @@ local get_fields_definitions = function(root, query)
   return definition_sets
 end
 
-local get_fields_definition_fields = function(root, query, start_row, end_row)
-  local field_definitions = {}
-  for id, node in query:iter_captures(root, 0, start_row, end_row) do
-    if query.captures[id] == 'field_definition' then
-      table.insert(field_definitions, node)
+local get_fields_definition_fields = function(root, query, start_row, end_row) for _, match in query:iter_matches(root, 0, start_row, end_row) do
+    local field_definitions = {}
+    for id, node in query:iter_captures(root, 0, start_row, end_row) do
+      if query.captures[id] == 'field_definition' then
+        table.insert(field_definitions, node)
+      end
     end
+    return field_definitions
   end
-  return field_definitions
 end
 
-local get_field_name = function(root, start_row, end_row)
-  local query = vim.treesitter.parse_query('graphql', '(field_definition (name) @name)')
-
+local get_field_name = function(root, query, start_row, end_row)
   local name = ''
-  for id, node in query:iter_captures(root, 0, 0, -1) do
-    if query.captures[id] == 'name' and node:start() >= start_row and node:end_() <= end_row then
+  for id, node in query:iter_captures(root, 0, start_row, end_row) do
+    if query.captures[id] == 'name' then
+      print(string.format('you found a name: %s', name))
       name = node
     end
   end
-  return name
 end
 --local get_fields = function(root, start_row, end_row)
   --local query_string = '((field_definition (name) @name))'
@@ -69,28 +70,32 @@ end
 
 M.execute = function()
   local parser = vim.treesitter.get_parser(0, 'graphql')
-  local query = vim.treesitter.parse_query('graphql', get_query('formatter'))
+  --local query = vim.treesitter.parse_query('graphql', get_query('formatter'))
+  local query = vim.treesitter.parse_query('graphql', '((fields_definition) @fields_definition)')
 
   local tree = parser:parse()
-  local root
-  for _,t in pairs(tree) do
-    root = t:root()
-  end
-
+  local root = tree:root()
   local definitions_sets = get_fields_definitions(root, query)
-
   for _, node in pairs(definitions_sets) do
     local start_row, _, end_row, _ = node:range()
-    local fields = get_fields_definition_fields(root, query, start_row, end_row)
+    local fields = get_fields_definition_fields(query, start_row, end_row)
 
     for _, field_node in pairs(fields) do
-      local field_start_row, _, field_end_row, _ = field_node:range()
-      local name = get_field_name(root, field_start_row, field_end_row)
-
-      --local edits = {} local range = ts_utils.node_to_lsp_range(name)
-      --table.insert(edits, { range = range, newText = 'hello' })
-      --vim.lsp.util.apply_text_edits(edits,  0)
+      local field_start_row, _, field_end_row, _ = node:range()
+      get_field_name(root, query, field_start_row, field_end_row)
+      print(field_node)
     end
+
+    --local edits = {}
+    --for _, field_node in pairs(fields) do
+      --local field_start_row, _, field_end_row, _ = node:range()
+      --local field_name = get_fields(root, field_start_row, field_end_row)
+      --print(field_name)
+      --local range = ts_utils.node_to_lsp_range(field_node)
+      --table.insert(edits, { range = range, newText = 'hello' })
+    --end
+
+    --vim.lsp.util.apply_text_edits(edits,  0)
   end
 end
 

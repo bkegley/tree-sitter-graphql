@@ -24,7 +24,7 @@ mutation CreatePerson($input: CreatePerson) {
 }
 
 subscription {
-  subscribeToNotification(id: "12345") {
+  subscribeToNotification(input: { hello: "there", you: 1 }) {
     username
     notification {
       content

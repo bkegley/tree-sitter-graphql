@@ -769,6 +769,10 @@
       "required": true,
       "types": [
         {
+          "type": "comma",
+          "named": true
+        },
+        {
           "type": "name",
           "named": true
         },
