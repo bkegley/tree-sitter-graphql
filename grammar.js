@@ -296,7 +296,7 @@ module.exports = grammar({
     enum_value: ($) => $.name,
     list_value: ($) => seq("[", repeat($.value), "]"),
     object_value: ($) => seq("{", repeat($.object_field), "}"),
-    object_field: ($) => seq($.name, ":", $.value),
+    object_field: ($) => seq($.name, ":", $.value, optional($.comma)),
     fragment_spread: ($) => seq("...", $.fragment_name, optional($.directives)),
     fragment_definition: ($) =>
       seq(
