@@ -2284,7 +2284,15 @@
   "extras": [
     {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": "[\\s\\uFEFF\\u0009\\u0020\\u000A\\u000D]"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "comma"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "comment"
     }
   ],
   "conflicts": [],
