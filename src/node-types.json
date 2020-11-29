@@ -1518,6 +1518,10 @@
     "named": true
   },
   {
+    "type": "comment",
+    "named": true
+  },
+  {
     "type": "directive",
     "named": false
   },

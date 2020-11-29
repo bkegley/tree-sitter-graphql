@@ -8,7 +8,7 @@ interface Entity {
 directive @skip on FIELD_DEFINITION
 
 interface Person {
-  name: String!
+  name: String! # TODO: deprecate
 }
 
 type Contact implements Person {

@@ -10,7 +10,7 @@ interface Entity {
 }
 
 interface Person {
-  name: String!
+  name: String! # TODO: deprecate
 }
 
 type Contact implements Person {
@@ -60,10 +60,12 @@ directive @dateFormat(format: String = "YY-MM-DD") on FIELD
       (name)
       (type (non_null_type (named_type (name))))))))))
   (definition (type_system_definition (type_definition (interface_type_definition
-    (name) (fields_definition (field_definition
-      (name)
-      (type (non_null_type (named_type 
-        (name))))))))))
+    (name) (fields_definition
+      (field_definition
+        (name)
+        (type (non_null_type (named_type 
+          (name)))))
+      (comment))))))
   (definition (type_system_definition (type_definition (object_type_definition 
     (name)
     (implements_interfaces (named_type (name)))
