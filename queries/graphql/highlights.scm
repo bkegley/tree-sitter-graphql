@@ -22,6 +22,9 @@
 (directive_definition
   (name) @type)
 
+(directive_definition
+  "@" @type)
+
 (scalar_type_extension
   (name) @type)
 
@@ -62,11 +65,21 @@
   (object_field
     (name) @property))
 
+(enum_value
+  (name) @property)
+
 ; Variable Definitions and Arguments 
 ;-----------------------------------
 
 (operation_definition
   (name) @variable)
+
+(fragment_name
+  (name) @variable)
+
+(input_fields_definition
+  (input_value_definition
+    (name) @parameter))
 
 (argument
   (name) @parameter)
@@ -98,6 +111,8 @@
 
 (description) @comment
 
+(comment) @comment
+
 (directive_location
   (executable_directive_location) @type.builtin)
 
@@ -123,6 +138,7 @@
   "schema"
   "on"
   "repeatable"
+  "implements"
 ] @keyword
 
 ; Punctuation
