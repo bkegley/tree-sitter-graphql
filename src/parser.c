@@ -13,7 +13,7 @@
 #pragma GCC optimize ("O0")
 #endif
 
-#define LANGUAGE_VERSION 12
+#define LANGUAGE_VERSION 13
 #define STATE_COUNT 396
 #define LARGE_STATE_COUNT 2
 #define SYMBOL_COUNT 142
@@ -22,6 +22,7 @@
 #define EXTERNAL_TOKEN_COUNT 0
 #define FIELD_COUNT 0
 #define MAX_ALIAS_SEQUENCE_LENGTH 8
+#define PRODUCTION_ID_COUNT 1
 
 enum {
   anon_sym_schema = 1,
@@ -1028,7 +1029,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   },
 };
 
-static TSSymbol ts_alias_sequences[1][MAX_ALIAS_SEQUENCE_LENGTH] = {
+static TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE_LENGTH] = {
   [0] = {0},
 };
 
@@ -2054,7 +2055,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == 65279) ADVANCE(293);
       if (lookahead == '"') ADVANCE(5);
       if (lookahead == '#') ADVANCE(292);
-      if (lookahead == ',') ADVANCE(355);
+      if (lookahead == ',') ADVANCE(356);
       if (lookahead != 0) ADVANCE(294);
       END_STATE();
     case 294:
@@ -2073,7 +2074,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 297:
       ACCEPT_TOKEN(aux_sym_string_value_token2);
       if (lookahead == '#') ADVANCE(298);
-      if (lookahead == ',') ADVANCE(356);
+      if (lookahead == ',') ADVANCE(355);
       if (lookahead == '\t' ||
           lookahead == '\r' ||
           lookahead == ' ' ||
@@ -2361,15 +2362,15 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 355:
       ACCEPT_TOKEN(sym_comma);
       if (lookahead != 0 &&
-          lookahead != '"') ADVANCE(294);
-      if (lookahead == '"') ADVANCE(5);
+          lookahead != '\n' &&
+          lookahead != '"' &&
+          lookahead != '\\') ADVANCE(299);
       END_STATE();
     case 356:
       ACCEPT_TOKEN(sym_comma);
       if (lookahead != 0 &&
-          lookahead != '\n' &&
-          lookahead != '"' &&
-          lookahead != '\\') ADVANCE(299);
+          lookahead != '"') ADVANCE(294);
+      if (lookahead == '"') ADVANCE(5);
       END_STATE();
     default:
       return false;
@@ -10457,21 +10458,22 @@ extern const TSLanguage *tree_sitter_graphql(void) {
     .alias_count = ALIAS_COUNT,
     .token_count = TOKEN_COUNT,
     .external_token_count = EXTERNAL_TOKEN_COUNT,
-    .symbol_names = ts_symbol_names,
-    .symbol_metadata = ts_symbol_metadata,
-    .parse_table = (const uint16_t *)ts_parse_table,
-    .parse_actions = ts_parse_actions,
-    .lex_modes = ts_lex_modes,
-    .alias_sequences = (const TSSymbol *)ts_alias_sequences,
-    .max_alias_sequence_length = MAX_ALIAS_SEQUENCE_LENGTH,
-    .lex_fn = ts_lex,
-    .field_count = FIELD_COUNT,
+    .state_count = STATE_COUNT,
     .large_state_count = LARGE_STATE_COUNT,
+    .production_id_count = PRODUCTION_ID_COUNT,
+    .field_count = FIELD_COUNT,
+    .max_alias_sequence_length = MAX_ALIAS_SEQUENCE_LENGTH,
+    .parse_table = (const uint16_t *)ts_parse_table,
     .small_parse_table = (const uint16_t *)ts_small_parse_table,
     .small_parse_table_map = (const uint32_t *)ts_small_parse_table_map,
+    .parse_actions = ts_parse_actions,
+    .symbol_names = ts_symbol_names,
+    .symbol_metadata = ts_symbol_metadata,
     .public_symbol_map = ts_symbol_map,
     .alias_map = ts_non_terminal_alias_map,
-    .state_count = STATE_COUNT,
+    .alias_sequences = (const TSSymbol *)ts_alias_sequences,
+    .lex_modes = ts_lex_modes,
+    .lex_fn = ts_lex,
   };
   return &language;
 }
