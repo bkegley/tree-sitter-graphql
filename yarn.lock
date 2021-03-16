@@ -628,10 +628,10 @@ tough-cookie@~2.5.0:
     psl "^1.1.28"
     punycode "^2.1.1"
 
-tree-sitter-cli@^0.17.3:
-  version "0.17.3"
-  resolved "https://registry.yarnpkg.com/tree-sitter-cli/-/tree-sitter-cli-0.17.3.tgz#ea03ee93216b0cf3187503d8a4dbff15df4dfc0a"
-  integrity sha512-AsQhjwRwWK5wtymwVc2H5E8/Q7yzMebSj7CQyeSg50k4h7m8HHwao1i/eKlh8aGTJ3IWbGjSwBAUZTSbzcSW6Q==
+tree-sitter-cli@^0.19.3:
+  version "0.19.3"
+  resolved "https://registry.yarnpkg.com/tree-sitter-cli/-/tree-sitter-cli-0.19.3.tgz#78681667ab565ce7ba88b3fbede1343476afc149"
+  integrity sha512-UlntGxLrlkQCKVrhm7guzfi+ovM4wDLVCCu3z5jmfDgFNoUoKa/23ddaQON5afD5jB9a02xv4N5MXJfCx+/mpw==
 
 tunnel-agent@^0.6.0:
   version "0.6.0"
