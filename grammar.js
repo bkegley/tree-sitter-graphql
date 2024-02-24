@@ -3,6 +3,8 @@ module.exports = grammar({
 
   extras: ($) => [/[\s\uFEFF\u0009\u0020\u000A\u000D]/, $.comma, $.comment],
 
+  inline: ($) => [$.string_fragment, $.escape_sequence],
+
   rules: {
     source_file: ($) => $.document,
     document: ($) => repeat1($.definition),
@@ -280,7 +282,28 @@ module.exports = grammar({
     string_value: ($) =>
       choice(
         seq('"""', /([^"]|\n|""?[^"])*/, '"""'),
-        seq('"', /[^"\\\n]*/, '"')
+        seq(
+          '"',
+          repeat(
+            choice(
+              $.string_fragment,
+              $.escape_sequence,
+            ),
+          ),
+          '"',
+        )
+      ),
+    string_fragment: _ => seq(/[^"\\\r\n]+/),
+    escape_sequence: _ => seq(
+        '\\',
+        choice(
+          /[^xu0-7]/,
+          /[0-7]{1,3}/,
+          /x[0-9a-fA-F]{2}/,
+          /u[0-9a-fA-F]{4}/,
+          /u{[0-9a-fA-F]+}/,
+          /[\r?][\n\u2028\u2029]/,
+        ),
       ),
     int_value: ($) => /-?(0|[1-9][0-9]*)/,
     float_value: ($) =>

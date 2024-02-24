@@ -63,67 +63,67 @@ directive @dateFormat(format: String = "YY-MM-DD") on FIELD
     (name) (fields_definition
       (field_definition
         (name)
-        (type (non_null_type (named_type 
+        (type (non_null_type (named_type
           (name)))))
       (comment))))))
-  (definition (type_system_definition (type_definition (object_type_definition 
+  (definition (type_system_definition (type_definition (object_type_definition
     (name)
     (implements_interfaces (named_type (name)))
-    (fields_definition (field_definition 
+    (fields_definition (field_definition
       (name)
-      (type (non_null_type (named_type 
+      (type (non_null_type (named_type
         (name))))))))))
-  (definition (type_system_definition (type_definition (object_type_definition 
+  (definition (type_system_definition (type_definition (object_type_definition
     (name)
-    (implements_interfaces (implements_interfaces (named_type 
+    (implements_interfaces (implements_interfaces (named_type
       (name)))
     (named_type (name)))
-    (fields_definition (field_definition 
+    (fields_definition (field_definition
       (name)
       (type (non_null_type (named_type (name)))))
-    (field_definition 
+    (field_definition
       (name)
       (type (non_null_type (named_type (name)))))
-    (field_definition 
+    (field_definition
       (name)
       (type (named_type (name))))
-    (field_definition 
+    (field_definition
       (name)
       (type (named_type (name)))))))))
-  (definition (type_system_definition (type_definition (union_type_definition 
+  (definition (type_system_definition (type_definition (union_type_definition
     (name)
     (union_member_types (union_member_types (named_type (name)))
     (named_type (name)))))))
   (definition (type_system_definition (type_definition (scalar_type_definition (name)))))
-  (definition (type_system_definition (type_definition (enum_type_definition 
+  (definition (type_system_definition (type_definition (enum_type_definition
     (name)
     (enum_values_definition (enum_value_definition (enum_value (name)))
     (enum_value_definition (enum_value (name))))))))
-  (definition (type_system_definition (type_definition (input_object_type_definition 
+  (definition (type_system_definition (type_definition (input_object_type_definition
     (name)
-    (input_fields_definition (input_value_definition 
+    (input_fields_definition (input_value_definition
       (name)
       (type (non_null_type (named_type (name)))))
-    (input_value_definition 
+    (input_value_definition
       (name)
       (type (non_null_type (named_type (name))))
       (default_value (value (string_value)))))))))
-  (definition (type_system_extension (type_extension (object_type_extension 
+  (definition (type_system_extension (type_extension (object_type_extension
     (name)
-    (fields_definition (field_definition 
+    (fields_definition (field_definition
       (name)
       (type (list_type (type (named_type (name))))))
-    (field_definition 
+    (field_definition
       (name)
-      (arguments_definition (input_value_definition 
+      (arguments_definition (input_value_definition
         (name)
         (type (non_null_type (named_type (name))))))
       (type (named_type (name)))))))))
-  (definition (type_system_extension (type_extension (object_type_extension 
+  (definition (type_system_extension (type_extension (object_type_extension
     (name)
-    (fields_definition (field_definition 
+    (fields_definition (field_definition
       (name)
-      (arguments_definition (input_value_definition 
+      (arguments_definition (input_value_definition
         (name)
         (type (named_type (name)))))
       (type (named_type (name)))))))))
@@ -190,7 +190,7 @@ fragment ContactFragment on Contact {
 }
 
 ---
-(source_file (document 
+(source_file (document
   (definition (executable_definition (operation_definition
     (operation_type)
     (name)
@@ -218,7 +218,7 @@ fragment ContactFragment on Contact {
         (name)
         (arguments (argument
           (name)
-          (value (variable (name))))) 
+          (value (variable (name)))))
         (selection_set
           (selection (inline_fragment
             (type_condition (named_type (name)))
@@ -243,7 +243,7 @@ fragment ContactFragment on Contact {
           (value (variable (name)))))
         (selection_set
           (selection (field (name)))
-          (selection (field (name)))))))))) 
+          (selection (field (name))))))))))
   (definition (executable_definition (operation_definition
     (operation_type)
     (selection_set
@@ -254,7 +254,7 @@ fragment ContactFragment on Contact {
           (value (string_value))))
         (selection_set
           (selection (field (name)))
-          (selection (field 
+          (selection (field
             (name)
             (selection_set
               (selection (field (name)))
@@ -288,7 +288,7 @@ schema @deprecated {
     (root_operation_type_definition
       (operation_type)
       (named_type (name)))
-    (root_operation_type_definition 
+    (root_operation_type_definition
       (operation_type)
       (named_type (name))))))
   (definition (type_system_definition (schema_definition
@@ -299,3 +299,35 @@ schema @deprecated {
     (root_operation_type_definition
       (operation_type)
       (named_type (name))))))))
+
+===
+Escape sequences in strings
+===
+
+query ShipmentFilter {
+  city(method: "App\\GraphQL\\Controllers\\ShipmentController \"some\"") {
+    field
+  }
+}
+
+---
+(source_file
+  (document
+    (definition
+        (executable_definition
+        (operation_definition
+            (operation_type)
+            (name)
+            (selection_set
+            (selection
+                (field
+                (name)
+                (arguments
+                    (argument
+                    (name)
+                    (value
+                        (string_value))))
+                    (selection_set
+                        (selection
+                        (field
+                            (name))))))))))))
