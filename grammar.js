@@ -27,13 +27,18 @@ module.exports = grammar({
         "}"
       ),
     schema_extension: ($) =>
-      seq(
-        "extend",
-        "schema",
-        optional($.directives),
-        "{",
-        $.root_operation_type_definition,
-        "}"
+      prec.right(
+        choice(
+          seq(
+            "extend",
+            "schema",
+            optional($.directives),
+            "{",
+            repeat1($.root_operation_type_definition),
+            "}"
+          ),
+          seq("extend", "schema", optional($.directives))
+        )
       ),
     type_extension: ($) =>
       choice(
