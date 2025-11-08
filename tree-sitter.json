@@ -1,0 +1,39 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "graphql",
+      "camelcase": "GraphQL",
+      "title": "GraphQL",
+      "scope": "source.graphql",
+      "file-types": [
+        "graphql"
+      ],
+      "injection-regex": "^graphql$",
+      "class-name": "TreeSitterGraphql"
+    }
+  ],
+  "metadata": {
+    "version": "0.0.1",
+    "license": "MIT",
+    "description": "A treesitter grammar for GraphQL",
+    "authors": [
+      {
+        "name": "Bryan Kegley",
+        "email": "hi@bryankegley.me"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/bkegley/tree-sitter-graphql"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
